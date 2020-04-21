@@ -1,5 +1,6 @@
 <template>
   <div class="poge-home">
+    <!-- 首页头部 -->
     <header class="index-header">
       <a href="mine.html?cpid=0">
         <div class="header-user">
@@ -12,48 +13,54 @@
       </a>
     </header>
 
-    <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item><img src="../../assets/banner1.jpg" alt /></van-swipe-item>
-      <van-swipe-item><img src="../../assets/banner2.jpg" alt /></van-swipe-item>
-      <van-swipe-item><img src="../../assets/banner3.jpg" alt /></van-swipe-item>
-    </van-swipe>
+    <Swiper class="my-swiper" :autoplay="1000" :loop="true" @change="fn1">
+      <SwiperItem>
+        <img src="@/assets/banner1.jpg" alt="">
+      </SwiperItem>
+      <SwiperItem>
+        <img src="@/assets/banner2.jpg" alt="">
+      </SwiperItem>
+      <SwiperItem>
+        <img src="@/assets/banner3.jpg" alt="">
+      </SwiperItem>
+    </Swiper>
 
-<nav class="index-nav">
-    <a href="#">
+    <nav class="index-nav">
+      <a href="#">
         <div class="nav-item">
-            <div class="nav-pic pic-1">
-              <img src="../../assets/nav-icon1.png" alt="">
-            </div>
-            <p class="nav-text font-24">分类</p>
+          <div class="nav-pic pic-1">
+            <img src="../../assets/nav-icon1.png" alt />
+          </div>
+          <p class="nav-text font-24">分类</p>
         </div>
-    </a>
-    <a href="#">
+      </a>
+      <a href="#">
         <div class="nav-item">
-            <div class="nav-pic pic-2">
-              <img src="../../assets/nav-icon2.png" alt="">
-            </div>
-            <p class="nav-text font-24">排行</p>
+          <div class="nav-pic pic-2">
+            <img src="../../assets/nav-icon2.png" alt />
+          </div>
+          <p class="nav-text font-24">排行</p>
         </div>
-    </a>
-    <a href="#">
+      </a>
+      <a href="#">
         <div class="nav-item">
-            <div class="nav-pic pic-3">
-              <img src="../../assets/nav-icon3.png" alt="">
-            </div>
-            <p class="nav-text font-24">VIP专区</p>
+          <div class="nav-pic pic-3">
+            <img src="../../assets/nav-icon3.png" alt />
+          </div>
+          <p class="nav-text font-24">VIP专区</p>
         </div>
-    </a>
-    <a href="#">
+      </a>
+      <a href="#">
         <div class="nav-item">
-            <div class="nav-pic pic-4">
-              <img src="../../assets/nav-icon4.png" alt="">
-            </div>
-            <p class="nav-text font-24">历史</p>
+          <div class="nav-pic pic-4">
+            <img src="../../assets/nav-icon4.png" alt />
+          </div>
+          <p class="nav-text font-24">历史</p>
         </div>
-    </a>
-</nav>
+      </a>
+    </nav>
 
-  <section class="index-recommend">
+    <section class="index-recommend">
     <div class="recommend-divide"></div>
     <div class="recommend-title">
         <div class="title-group">
@@ -84,20 +91,27 @@
             <p class="item-text font-24">末世穿越而来的王者！</p>
         </div>
     </div>
-</section>
-</div>
+    </section>
+  </div>
 </template>
 
 <script>
-import { Swipe, SwipeItem } from 'vant'
+import { Swiper, SwiperItem } from '@/components/Swiper'
 
 export default {
   name: 'Home',
 
   components: {
-    'van-swipe': Swipe,
-    'van-swipe-item': SwipeItem
+    Swiper,
+    SwiperItem
+  },
+
+  methods: {
+    fn1 (index) {
+      console.log(index)
+    }
   }
+
 }
 </script>
 
@@ -138,18 +152,11 @@ export default {
   }
 }
 
- .my-swipe .van-swipe-item {
-    color: #fff;
-    font-size: 20px;
-    text-align: center;
-    height: 180px;
+.my-swiper img{
+  width: 100%;
+}
 
-    img{
-      width: 100%;
-    }
-  }
-
-.index-nav{
+.index-nav {
   height: 100px;
   display: flex;
   justify-content: space-around;
@@ -157,52 +164,52 @@ export default {
   font-size: 12px;
   text-align: center;
 
-  .nav-item{
+  .nav-item {
     width: 55px;
     height: 75px;
 
-    .nav-text{
+    .nav-text {
       color: #8d8d8d;
     }
 
-  .nav-pic{
-    width: 55px;
-    height: 55px;
+    .nav-pic {
+      width: 55px;
+      height: 55px;
 
-    img{
-      width: 100%;
+      img {
+        width: 100%;
+      }
     }
   }
 }
-}
 
-.recommend-divide{
+.recommend-divide {
   height: 10px;
   background-color: #f4f4f4;
 }
 
-.recommend-title{
+.recommend-title {
   width: 100%;
   height: 24px;
   display: flex;
   margin: 20px 0;
 }
 
-.title-more{
+.title-more {
   font-size: 12px;
   margin-right: 20px;
   color: #b0b0b0;
   line-height: 23px;
 }
 
-.title-text{
+.title-text {
   display: flex;
   font-size: 20px;
   color: #3a3a3a;
   font-weight: 500;
 }
 
-.title-group{
+.title-group {
   width: 150px;
   height: 23px;
   display: flex;
@@ -210,7 +217,7 @@ export default {
   flex: 1;
   margin-left: 120px;
 
-  img{
+  img {
     padding-top: 5px;
     margin-right: 5px;
     width: 22px;
@@ -222,35 +229,34 @@ export default {
   overflow-y: scroll;
 }
 
-.recommend-type-1{
+.recommend-type-1 {
   display: flex;
   justify-content: space-between;
   align-content: center;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding: 0 .26666667rem;
+  padding: 0 0.26666667rem;
 }
 
-.item{
+.item {
   width: 173px;
   height: 218px;
 
-  img{
+  img {
     width: 173px;
     height: 173px;
   }
 
-  .item-name{
+  .item-name {
     color: #3a3a3a;
     font-size: 12px;
     line-height: 20px;
   }
 
-  .item-text{
+  .item-text {
     font-size: 12px;
     color: #8d8d8d;
     line-height: 20px;
   }
 }
-
 </style>

@@ -97,5 +97,8 @@ input, select {
 
 // ==================
 html,body,#app{
+    // 写成大写的PX就不会被转换成rem
+  max-width: 540PX;
   height: 100%;
+  margin: auto;
 }
