@@ -1,6 +1,6 @@
 <template>
   <!-- 轮播图 -->
-  <div class="swiper-container">
+  <div class="swiper-container" ref="my-swiper">
     <div class="swiper-wrapper">
       <slot></slot>
     </div>
@@ -31,7 +31,7 @@ export default {
   mounted () {
     const _this = this
     /* eslint-disable */
-    new Swiper(".swiper-container", {
+    new Swiper(this.$refs['my-swiper'], { // this.$el 也可以取到当前根元素的实例
       pagination: {
         el: ".swiper-pagination"
       },
@@ -41,7 +41,7 @@ export default {
       autoplay: this.autoplay ? {
         delay: this.autoplay,
         stopOnLastSlide: false,
-        disableOnInteraction: true,
+        disableOnInteraction: false,
       } : false,
 
       on: {

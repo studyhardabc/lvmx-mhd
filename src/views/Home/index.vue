@@ -13,15 +13,11 @@
       </a>
     </header>
 
-    <Swiper class="my-swiper" :autoplay="1000" :loop="true" @change="fn1">
-      <SwiperItem>
-        <img src="@/assets/banner1.jpg" alt="">
-      </SwiperItem>
-      <SwiperItem>
-        <img src="@/assets/banner2.jpg" alt="">
-      </SwiperItem>
-      <SwiperItem>
-        <img src="@/assets/banner3.jpg" alt="">
+    <br/>
+
+    <Swiper class="my-swiper" :autoplay="1000" :loop="true" @change="fn1" v-if="bannerList.length > 0">
+      <SwiperItem v-for="item in bannerList" :key="item.id">
+        <img :src="item.imageurl" alt="">
       </SwiperItem>
     </Swiper>
 
@@ -98,6 +94,8 @@
 <script>
 import { Swiper, SwiperItem } from '@/components/Swiper'
 
+import { getBanner } from '@/api/cartoon'
+
 export default {
   name: 'Home',
 
@@ -106,28 +104,52 @@ export default {
     SwiperItem
   },
 
+  data () {
+    return {
+      bannerList: []
+    }
+  },
+
   methods: {
     fn1 (index) {
       console.log(index)
     }
+  },
+
+  created () {
+    getBanner().then(res => {
+      console.log(res)
+      if (res.code === 200) {
+        this.bannerList = res.info
+      } else {
+        alert(res.code_msg)
+      }
+    }).catch(err => {
+      console.log(err)
+      alert('网络异常，请稍后重试')
+    })
   }
 
 }
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/mixins.scss';
+
 .poge-home {
   display: flex;
   flex-direction: column;
   height: 100%;
 
   .index-header {
+    @include border-bottom;
     display: flex;
     height: 44px;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
+    // border-bottom: 1px solid #ddd;
 
     .user-btn {
       width: 25px;
